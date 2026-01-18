@@ -103,40 +103,8 @@ public class LanguageModel {
 	 */
 	public String generate(String initialText, int textLength) {
 		// Your code goes here
-
-    // 1. בדיקה אם ה"פרומפט" ארוך מספיק כדי להתחיל את התהליך [cite: 227]
-    if (initialText.length() < windowLength) {
-        return initialText; // אם לא, מחזירים את הטקסט המקורי ומפסיקים [cite: 228]
-    }
-
-    // 2. אתחול משתנה הטקסט שנוצר והחלון הנוכחי [cite: 230]
-    String generatedText = initialText;
-    // החלון מוגדר כ-n התווים האחרונים של הפרומפט [cite: 230]
-    String window = initialText.substring(initialText.length() - windowLength);
-
-    // 3. לולאת יצירת הטקסט עד הגעה לאורך המבוקש 
-    while (generatedText.length() < textLength) {
-        // ניסיון לשלוף את רשימת האפשרויות עבור החלון הנוכחי מהמפה [cite: 217]
-        List probs = (List) probabilities.get(window);
-
-        // אם החלון לא נמצא במפה, עוצרים ומחזירים את מה שנוצר עד כה 
-        if (probs == null) {
-            break;
-        }
-
-        // 4. הגרלת תו חדש מתוך הרשימה בעזרת שיטת מונטה קרלו [cite: 219]
-        char nextChar = getRandomChar(probs);
-
-        // 5. עדכון הטקסט הנוצר והחלון [cite: 220, 231]
-        generatedText += nextChar;
-        // החלון החדש הוא תמיד windowLength התווים האחרונים של מה שנוצר 
-        window = generatedText.substring(generatedText.length() - windowLength);
-    }
-
-    return generatedText;
-}
-
-    
+        return "";
+	}
 
     /** Returns a string representing the map of this language model. */
 	public String toString() {
@@ -151,4 +119,5 @@ public class LanguageModel {
     public static void main(String[] args) {
 		// Your code goes here
     }
+
 }
