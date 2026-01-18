@@ -134,6 +134,26 @@ public class LanguageModel {
 
     public static void main(String[] args) {
 		// Your code goes here
+        // 1. קריאת הארגומנטים משורת הפקודה
+    int windowLength = Integer.parseInt(args[0]);
+    String initialText = args[1];
+    int generatedTextLength = Integer.parseInt(args[2]);
+    boolean isRandom = args[3].equals("random");
+    String fileName = args[4];
+
+    // 2. יצירת המודל - בחירה בין אקראי לבין Seed קבוע (20) לצורך הבדיקות
+    LanguageModel lm;
+    if (isRandom) {
+        lm = new LanguageModel(windowLength);
+    } else {
+        lm = new LanguageModel(windowLength, 20); // ה-Seed הקבוע שהטסטים מצפים לו
     }
+
+    // 3. אימון המודל על קובץ הטקסט
+    lm.train(fileName);
+
+    // 4. יצירת הטקסט והדפסתו
+    System.out.println(lm.generate(initialText, generatedTextLength));
+}
 
 }
